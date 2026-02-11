@@ -1,0 +1,190 @@
+index.html<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Surprise</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#ff4e8a,#ff7eb3);
+height:100vh;
+overflow:hidden;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+color:white;
+text-align:center;
+transition: background 3s;
+}
+
+.container{
+animation:fadeIn 1s ease;
+width:90%;
+max-width:500px;
+}
+
+input{
+padding:12px;
+border:none;
+border-radius:25px;
+width:100%;
+text-align:center;
+font-size:16px;
+margin:10px 0;
+outline:none;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:white;
+color:#ff4e8a;
+font-weight:bold;
+cursor:pointer;
+font-size:16px;
+margin-top:10px;
+transition:0.3s;
+width:100%;
+}
+
+button:active{
+transform:scale(0.97);
+}
+
+#finalMessage{
+display:none;
+}
+
+h1{font-size:34px;margin:10px 0}
+h2{margin:5px 0}
+p{font-size:18px;margin:8px 0}
+
+.heart{
+position:absolute;
+animation:float 6s linear forwards;
+font-size:20px;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:1}
+100%{transform:translateY(-10vh);opacity:0}
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:scale(0.9)}
+to{opacity:1;transform:scale(1)}
+}
+
+#muteBtn{
+position:absolute;
+top:15px;
+right:15px;
+background:white;
+color:#ff4e8a;
+border-radius:50%;
+width:45px;
+height:45px;
+font-size:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Enter The Password ❤️</h2>
+<input type="password" id="pass" placeholder="Password">
+<button onclick="checkPass()">Enter</button>
+
+<div id="finalMessage">
+<h1>Happy Valentine's Day ❤️</h1>
+<h2>To Hayam ❤️</h2>
+
+<p>يا حبيبة قلبي، كل يوم بيعدي وأنا معاك بحس إني أسعد واحد على الأرض ❤️</p>
+<p>ضحكتك بتخليني أنسى كل حاجة وحشة حوالي، وكلامك الحلو بيرجعلي طاقتي وفرحتي 😍</p>
+
+<p>وجودك جنبي بيحسسني بالأمان 🥺🥹💕</p>
+<p>أوقات بحس إنك مش بس نصي التاني، لأ، أنت كل حياتي كلها 💖</p>
+<p>لما بشوفك، كل الهموم بتختفي، وكل حاجة حوالي بتبقى أحلى 🌹</p>
+
+<p>بحب كل حاجة فيكي… عيونك، ضحكتك، طريقة كلامك، حتى طريقة نظرتك ليّ، وبحب حنيتك 💞</p>
+<p>كل يوم معاك بيبقى عيد، وكل لحظة معاك ذكرى مش هتنساها أبدًا 🥰</p>
+
+<p>عارفة؟ حتى لما نكون ساكتين مع بعض، بحس إن الكلام مش محتاج 😌</p>
+<p>وجودك جنبي بيخليني أرتاح، وبجد مش قادر أتخيل حياتي من غيرك 💕</p>
+
+<p>بحبك من كل قلبي ❤️، وأتمنى نعيش مع بعض أحلى أيام حياتنا 🌟</p>
+<p>ونكمل طريقنا سوا، ونضحك ونحب ونكبر مع بعض… على طول 💖</p>
+</div>
+
+</div>
+
+<div id="muteBtn" onclick="toggleMusic()">🔊</div>
+
+<audio id="music" loop>
+<source src="berta7_wa_yak.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function checkPass(){
+var password = "love"; // الباسورد جاهز
+var entered = document.getElementById("pass").value;
+
+if(entered === password){
+document.querySelector("input").style.display="none";
+document.querySelector("button").style.display="none";
+document.getElementById("finalMessage").style.display="block";
+document.getElementById("music").play().catch(()=>{});
+startHearts();
+animateBackground();
+}else{
+alert("Wrong Password ❌");
+}
+}
+
+function startHearts(){
+setInterval(function(){
+var heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},500);
+}
+
+function toggleMusic(){
+var music=document.getElementById("music");
+var btn=document.getElementById("muteBtn");
+if(music.paused){
+music.play().catch(()=>{});
+btn.innerHTML="🔊";
+}else{
+music.pause();
+btn.innerHTML="🔇";
+}
+}
+
+function animateBackground(){
+let colors=["#ff4e8a","#ff7eb3","#fbc2eb","#a6c1ee"];
+let i=0;
+setInterval(()=>{
+document.body.style.background=`linear-gradient(135deg, ${colors[i]}, ${colors[(i+1)%colors.length]})`;
+i=(i+1)%colors.length;
+},4000);
+}
+</script>
+
+</body>
+</html>
